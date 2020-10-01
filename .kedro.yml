@@ -1,0 +1,6 @@
+context_path: loan_pred.run.ProjectContext
+project_name: "loan_pred"
+project_version: "0.16.5"
+package_name: "loan_pred"
+hooks:
+  - loan_pred.hooks.project_hooks
