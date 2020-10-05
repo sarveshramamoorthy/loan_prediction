@@ -35,6 +35,8 @@ from kedro.io import DataCatalog
 from kedro.pipeline import Pipeline
 from kedro.versioning import Journal
 
+from loan_pred.pipelines.premodeling import pipeline as premod
+
 
 class ProjectHooks:
     @hook_impl
@@ -45,7 +47,12 @@ class ProjectHooks:
             A mapping from a pipeline name to a ``Pipeline`` object.
 
         """
-        return {"__default__": Pipeline([])}
+        premod_pipeline = premod.create_pipeline()
+
+        return {
+        "premod" : premod_pipeline,
+        "__default__": premod_pipeline,
+        }
 
     @hook_impl
     def register_config_loader(self, conf_paths: Iterable[str]) -> ConfigLoader:
